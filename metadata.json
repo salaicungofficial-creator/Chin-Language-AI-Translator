@@ -1,0 +1,6 @@
+{
+  "name": "Chin Language AI Translator",
+  "description": "AI translation, medical triage & legal appointment phrase packs for Hakha Chin, Falam, Tedim, Mizo, Matu, Mara, Mindat Cho, Lautu, Zyphe, Burmese, and 130+ Google Translate world languages with dark mode.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

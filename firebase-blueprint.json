@@ -1,0 +1,115 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile, dialect settings, and notification preferences.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Firebase Authentication UID.",
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User display name.",
+          "maxLength": 100
+        },
+        "email": {
+          "type": "string",
+          "description": "User email address.",
+          "maxLength": 150
+        },
+        "preferredDialect": {
+          "type": "string",
+          "description": "Preferred primary Chin dialect code.",
+          "maxLength": 30
+        },
+        "appearance": {
+          "type": "string",
+          "description": "Theme setting (light, dark, system).",
+          "enum": ["light", "dark", "system"]
+        },
+        "notifications": {
+          "type": "object",
+          "description": "User notification preferences.",
+          "properties": {
+            "emailAlerts": { "type": "boolean" },
+            "weeklyDigest": { "type": "boolean" },
+            "communityUpdates": { "type": "boolean" }
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last update timestamp."
+        }
+      },
+      "required": ["userId", "email"]
+    },
+    "SavedPhrase": {
+      "title": "SavedPhrase",
+      "description": "User saved translation or phrasebook entry.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique phrase document ID.",
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Owner user UID.",
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "sourceText": {
+          "type": "string",
+          "description": "Original text.",
+          "maxLength": 2000
+        },
+        "targetText": {
+          "type": "string",
+          "description": "Translated text.",
+          "maxLength": 2000
+        },
+        "sourceLang": {
+          "type": "string",
+          "description": "Source language code.",
+          "maxLength": 30
+        },
+        "targetLang": {
+          "type": "string",
+          "description": "Target language code.",
+          "maxLength": 30
+        },
+        "category": {
+          "type": "string",
+          "description": "Optional category tag.",
+          "maxLength": 50
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp."
+        }
+      },
+      "required": ["userId", "sourceText", "targetText", "sourceLang", "targetLang"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": {
+        "$ref": "#/entities/UserProfile"
+      },
+      "description": "User profile documents keyed by auth UID."
+    },
+    "/users/{userId}/saved_phrases/{phraseId}": {
+      "schema": {
+        "$ref": "#/entities/SavedPhrase"
+      },
+      "description": "Private phrasebook entries saved by the user."
+    }
+  }
+}
