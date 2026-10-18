@@ -5,12 +5,23 @@
  * - Does not claim government-approved or legally certified status.
  */
 
+export interface CommunityTrustNoticeContent {
+  title: string;
+  text: string;
+}
+
+export const COMMUNITY_TRUST_NOTICE: CommunityTrustNoticeContent = {
+  title: 'Community Trust Notice',
+  text: 'Translations are generated using AI models designed to support Chin language translation and communication. Please verify translations with a fluent native speaker before using them for critical legal, medical, immigration, or official purposes.',
+};
+
 export interface OfficialNoticeContent {
   title: string;
   leadParagraph: string;
   criticalNotice: string;
   disclaimer: string;
   shortWarning: string;
+  communityTrustNotice: CommunityTrustNoticeContent;
   sections: {
     id: string;
     title: string;
@@ -31,6 +42,7 @@ export const OFFICIAL_NOTICE_DATA: OfficialNoticeContent = {
     'This application does not provide certified translations or professional medical or legal advice.',
   shortWarning:
     'AI Translation Notice: Do not rely solely on automated translations for medical emergencies, medication dosages, asylum hearings, or legal documents. Verify with a qualified human Chin interpreter.',
+  communityTrustNotice: COMMUNITY_TRUST_NOTICE,
   sections: [
     {
       id: 'medical-emergency',
@@ -97,6 +109,7 @@ export function validateOfficialNoticeIntegrity(): {
   isValid: boolean;
   hasRequiredPhrases: boolean;
   noGovernmentClaim: boolean;
+  hasCommunityTrustNotice: boolean;
 } {
   const data = OFFICIAL_NOTICE_DATA;
   const fullText = [
@@ -127,9 +140,17 @@ export function validateOfficialNoticeIntegrity(): {
     !lower.includes('this application is government-approved') &&
     !lower.includes('legally certified application');
 
+  const hasCommunityTrustNotice =
+    COMMUNITY_TRUST_NOTICE.title === 'Community Trust Notice' &&
+    COMMUNITY_TRUST_NOTICE.text ===
+      'Translations are generated using AI models designed to support Chin language translation and communication. Please verify translations with a fluent native speaker before using them for critical legal, medical, immigration, or official purposes.' &&
+    !COMMUNITY_TRUST_NOTICE.text.toLowerCase().includes('fine-tuned') &&
+    !COMMUNITY_TRUST_NOTICE.text.toLowerCase().includes('finetuned');
+
   return {
-    isValid: hasRequiredPhrases && noGovernmentClaim,
+    isValid: hasRequiredPhrases && noGovernmentClaim && hasCommunityTrustNotice,
     hasRequiredPhrases,
     noGovernmentClaim,
+    hasCommunityTrustNotice,
   };
 }

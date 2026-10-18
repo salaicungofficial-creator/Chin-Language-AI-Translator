@@ -38,6 +38,7 @@ import { DiacriticsBar } from './DiacriticsBar.tsx';
 import { UserAccount } from './AuthModal.tsx';
 import { LanguagePickerModal } from './LanguagePickerModal.tsx';
 import { GoogleTranslateCompareModal } from './GoogleTranslateCompareModal.tsx';
+import { CommunityTrustNotice } from './CommunityTrustNotice.tsx';
 
 interface TranslatorPanelProps {
   user: UserAccount | null;
@@ -740,8 +741,15 @@ export const TranslatorPanel: React.FC<TranslatorPanelProps> = ({
                     </div>
                   )}
 
+                  {/* Community Trust Notice Near Results */}
+                  <CommunityTrustNotice
+                    variant="compact"
+                    onOpenOfficialNotice={onOpenNotice}
+                    className="mt-3.5"
+                  />
+
                   {/* Quick Short Warning Near Results */}
-                  <div className="mt-3.5 p-3 rounded-xl bg-amber-50/95 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-700/80 text-xs text-amber-950 dark:text-amber-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 shadow-2xs">
+                  <div className="mt-2.5 p-3 rounded-xl bg-amber-50/95 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-700/80 text-xs text-amber-950 dark:text-amber-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 shadow-2xs">
                     <div className="flex items-start gap-2 leading-relaxed">
                       <AlertTriangle className="w-4 h-4 text-amber-700 dark:text-amber-400 shrink-0 mt-0.5" />
                       <span>
@@ -752,7 +760,7 @@ export const TranslatorPanel: React.FC<TranslatorPanelProps> = ({
                       <button
                         type="button"
                         onClick={onOpenNotice}
-                        className="text-[11px] font-bold text-amber-900 dark:text-amber-300 hover:text-amber-950 dark:hover:text-amber-100 hover:underline shrink-0 underline-offset-2 whitespace-nowrap flex items-center gap-1"
+                        className="text-[11px] font-bold text-amber-900 dark:text-amber-300 hover:text-amber-950 dark:hover:text-amber-100 hover:underline shrink-0 underline-offset-2 whitespace-nowrap flex items-center gap-1 cursor-pointer"
                       >
                         <span>Official Notice</span>
                         <span>→</span>
@@ -877,12 +885,18 @@ export const TranslatorPanel: React.FC<TranslatorPanelProps> = ({
                 </div>
               </div>
             ) : (
-              <div className="flex-1 flex flex-col items-center justify-center py-12 text-slate-400 dark:text-slate-500 text-center">
+              <div className="flex-1 flex flex-col items-center justify-center py-10 px-4 text-slate-400 dark:text-slate-500 text-center">
                 <Globe2 className="w-10 h-10 text-slate-300 dark:text-slate-600 mb-2 stroke-1" />
                 <p className="text-sm font-medium text-slate-500 dark:text-slate-400">Translation will appear here</p>
                 <p className="text-xs text-slate-400 dark:text-slate-500 mt-1 max-w-xs">
                   Supports 130+ Google Translate languages + 9 indigenous Chin dialects.
                 </p>
+                <div className="mt-4 w-full max-w-lg text-left">
+                  <CommunityTrustNotice
+                    variant="compact"
+                    onOpenOfficialNotice={onOpenNotice}
+                  />
+                </div>
               </div>
             )}
           </div>
@@ -958,6 +972,13 @@ export const TranslatorPanel: React.FC<TranslatorPanelProps> = ({
           </button>
         </div>
       </div>
+
+      {/* Community Trust Notice Displayed Below Translation Tool */}
+      <CommunityTrustNotice
+        variant="card"
+        onOpenOfficialNotice={onOpenNotice}
+        className="mt-4"
+      />
 
       {/* Suggest Correction Modal */}
       {feedbackModalOpen && (

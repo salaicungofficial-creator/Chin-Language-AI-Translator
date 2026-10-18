@@ -215,7 +215,7 @@ function AppContent() {
                 <div>
                   <h4 className="text-xs font-bold text-slate-900 dark:text-white">9 Indigenous Dialects</h4>
                   <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
-                    Fine-tuned for Hakha Chin, Falam, Tedim, Mizo, Matu, Mara, Mindat Cho, Lautu, and Zyphe with phonetic guides.
+                    Designed to support Hakha Chin, Falam, Tedim, Mizo, Matu, Mara, Mindat Cho, Lautu, and Zyphe with phonetic guides.
                   </p>
                 </div>
               </div>

@@ -341,7 +341,7 @@ export const AskAIView: React.FC<AskAIViewProps> = ({ onNavigateContact }) => {
               </div>
               <div>
                 <h3 className="font-bold text-slate-900 dark:text-white text-sm">Chin Community Assistant Response</h3>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400">Fine-tuned for Chin diaspora community needs</p>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400">Designed to support Chin diaspora community needs</p>
               </div>
             </div>
 

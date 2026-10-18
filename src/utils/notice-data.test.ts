@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
   OFFICIAL_NOTICE_DATA,
+  COMMUNITY_TRUST_NOTICE,
   validateOfficialNoticeIntegrity,
 } from './notice-data.ts';
 
@@ -24,11 +25,26 @@ test('OFFICIAL_NOTICE_DATA contains exact verbatim text specified by requirement
   );
 });
 
-test('validateOfficialNoticeIntegrity verifies all safety conditions without claiming government approval', () => {
+test('COMMUNITY_TRUST_NOTICE contains exact verbatim wording from prompt requirements', () => {
+  assert.equal(COMMUNITY_TRUST_NOTICE.title, 'Community Trust Notice');
+  assert.equal(
+    COMMUNITY_TRUST_NOTICE.text,
+    'Translations are generated using AI models designed to support Chin language translation and communication. Please verify translations with a fluent native speaker before using them for critical legal, medical, immigration, or official purposes.'
+  );
+  assert.equal(
+    OFFICIAL_NOTICE_DATA.communityTrustNotice.text,
+    COMMUNITY_TRUST_NOTICE.text
+  );
+  // Ensure no unconfirmed claims of fine-tuning exist
+  assert.equal(COMMUNITY_TRUST_NOTICE.text.toLowerCase().includes('fine-tuned'), false);
+});
+
+test('validateOfficialNoticeIntegrity verifies all safety conditions and community trust notice without claiming government approval', () => {
   const result = validateOfficialNoticeIntegrity();
   assert.equal(result.isValid, true);
   assert.equal(result.hasRequiredPhrases, true);
   assert.equal(result.noGovernmentClaim, true);
+  assert.equal(result.hasCommunityTrustNotice, true);
 });
 
 test('OFFICIAL_NOTICE_DATA includes structured sections for emergency, legal, documents, and non-certification', () => {

@@ -107,6 +107,30 @@ export const OfficialNoticeView: React.FC<OfficialNoticeViewProps> = ({
         </p>
       </section>
 
+      {/* Community Trust Notice Callout */}
+      <section
+        aria-labelledby="community-trust-heading"
+        className="rounded-2xl border-2 border-blue-200 dark:border-blue-800/80 bg-blue-50/70 dark:bg-blue-950/40 p-5 sm:p-6 shadow-xs space-y-3"
+      >
+        <div className="flex items-center justify-between gap-2 pb-2 border-b border-blue-200/80 dark:border-blue-900/60">
+          <div className="flex items-center gap-2">
+            <Info className="w-5 h-5 text-blue-700 dark:text-blue-400 shrink-0" />
+            <h2 id="community-trust-heading" className="text-sm font-extrabold text-blue-950 dark:text-blue-300 uppercase tracking-wider">
+              {data.communityTrustNotice.title}
+            </h2>
+          </div>
+          <span className="text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-900/60 text-blue-800 dark:text-blue-300">
+            Everyday Standard
+          </span>
+        </div>
+        <blockquote className="text-sm sm:text-base leading-relaxed text-slate-800 dark:text-slate-200 font-medium italic border-l-4 border-blue-500 pl-4 py-1">
+          &ldquo;{data.communityTrustNotice.text}&rdquo;
+        </blockquote>
+        <p className="text-xs text-slate-600 dark:text-slate-400">
+          This community trust notice is displayed across the Chin Language AI translation platform to remind all users and community service workers that human native speaker verification is essential before any high-stakes or critical application.
+        </p>
+      </section>
+
       {/* Structured Category Breakdowns */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Healthcare & Medical */}
